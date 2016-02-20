@@ -12,8 +12,8 @@ def food_choice(hash)
   elsif hash.keys.include?(choice)
     @price << hash[choice]
   else
-    puts "dont understand"
-    main_food_choice
+    puts "dont understand type again please"
+    food_choice(hash)
   end
 end
 
