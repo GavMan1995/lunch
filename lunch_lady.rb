@@ -4,50 +4,21 @@ require 'pry'
 @sec_side = {"fries" => 2.00, "jello" => 4.50, "beans" => 0.75}
 @price = []
 
-def main_food_choice
-choice = gets.strip.downcase
-  if choice == "quit"
-    "come again"
-    exit
-  else
-    @price << @main_dish_hash[choice]
-  end
-end
-
-def main_dish
-  @main_dish_hash.each do |food, price|
-    puts "#{food} #{price}"
-  end
-end
-
-def side_1_choice
+def food_choice(hash)
   choice = gets.strip.downcase
   if choice == "quit"
     "come again"
     exit
+  elsif hash.keys.include?(choice)
+    @price << hash[choice]
   else
-    @price << @first_side[choice]
+    puts "dont understand"
+    main_food_choice
   end
 end
 
-def side_1
-  @first_side.each do |food, price|
-    puts "#{food} #{price}"
-  end
-end
-
-def side_2_choice
-  choice = gets.strip.downcase
-  if choice == "quit"
-    "come again"
-    exit
-  else
-    @price << @sec_side[choice]
-  end
-end
-
-def side_2
-  @sec_side.each do |food, price|
+def choices(hash)
+  hash.each do |food, price|
     puts "#{food} #{price}"
   end
 end
@@ -60,26 +31,71 @@ def total
   puts total
 end
 
-def main
+def order(hash)
+  choices(hash)
+  food_choice(hash)
+end
+
+@new = 'new'
+
+while @new == "new"
   puts "--Lunch Menu--\ntype out main item to choose\n"
-  main_dish
-  main_food_choice
+  order(@main_dish_hash)
   puts "\nthank you, now what would you like for your first side dish"
-  side_1
-  side_1_choice
+  order(@first_side)
   puts "\nnow what would you like as your second side"
-  side_2
-  side_2_choice
+  order(@sec_side)
   print "\nyour total is: "
   total
   puts "type new for new order"
-  _new = gets.strip
-    case _new
-    when "new"
-      main
-    else
-      puts "thankyou come again"
-    end
+  @new = gets.strip
 end
+#
+# def main_dish
+#   @main_dish_hash.each do |food, price|
+#     puts "#{food} #{price}"
+#   end
+# end
 
-main
+# def side_choice(hash)
+#   choice = gets.strip.downcase
+#   if choice == "quit"
+#     "come again"
+#     exit
+#   else
+#     @price << hash[choice]
+#   end
+# end
+
+
+# def side_1_choice
+#   choice = gets.strip.downcase
+#   if choice == "quit"
+#     "come again"
+#     exit
+#   else
+#     @price << @first_side[choice]
+#   end
+# end
+
+# def side_1
+#   @first_side.each do |food, price|
+#     puts "#{food} #{price}"
+#   end
+# end
+
+# def side_2_choice
+#   choice = gets.strip.downcase
+#   if choice == "quit"
+#     "come again"
+#     exit
+#   else
+#     @price << @sec_side[choice]
+#   end
+# end
+
+# def side_2
+#   @sec_side.each do |food, price|
+#     puts "#{food} #{price}"
+#   end
+# end
